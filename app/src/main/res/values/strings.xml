@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppTestCompose</string>
     <string name="title_activity_pokemon">PokemonActivity</string>
+    <string name="title_activity_pokemon_detail">PokemonDetailActivity</string>
 </resources>

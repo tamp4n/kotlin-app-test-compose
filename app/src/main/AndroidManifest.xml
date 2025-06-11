@@ -13,6 +13,11 @@
         android:theme="@style/Theme.AppTestCompose"
         tools:targetApi="31">
         <activity
+            android:name=".pages.PokemonDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pokemon_detail"
+            android:theme="@style/Theme.AppTestCompose" />
+        <activity
             android:name=".pages.PokemonActivity"
             android:exported="true"
             android:label="@string/title_activity_pokemon"

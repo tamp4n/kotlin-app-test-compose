@@ -1,10 +1,13 @@
 package com.example.apptestcompose.pages
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.content.MediaType.Companion.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -69,6 +72,7 @@ class PokemonActivity : ComponentActivity() {
             AppTestComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     PokemonContent(
+                        context = this,
                         modifier = Modifier.padding(innerPadding)
                     )
 
@@ -101,7 +105,11 @@ class PokemonActivity : ComponentActivity() {
  * with each card being rendered by the PokemonItem composable function.
  */
 @Composable
-fun PokemonContent(modifier: Modifier = Modifier) {
+fun PokemonContent(
+    context: Context,
+    modifier: Modifier = Modifier
+) {
+
     val pokemons: List<PokemonModel> = getData()
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
@@ -109,7 +117,11 @@ fun PokemonContent(modifier: Modifier = Modifier) {
     ) {
         items(
             items = pokemons,
-            itemContent = { PokemonItem(it) }
+            itemContent = { pokemon ->
+                PokemonItem(pokemon) {
+                    context.startActivity(Intent(context, PokemonDetailActivity::class.java), null)
+                }
+            }
         )
     }
 }
@@ -137,7 +149,10 @@ fun PokemonContent(modifier: Modifier = Modifier) {
  *
  */
 @Composable
-fun PokemonItem(pokemon: PokemonModel) {
+fun PokemonItem(
+    pokemon: PokemonModel,
+    navigateToDetails: (PokemonModel) -> Unit = {}
+) {
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -146,7 +161,11 @@ fun PokemonItem(pokemon: PokemonModel) {
         colors = CardDefaults.elevatedCardColors(contentColor = Color.White),
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
-        Row {
+        Row(
+            modifier = Modifier.clickable {
+                navigateToDetails(pokemon)
+            }
+        ) {
             PokemonImage(pokemon = pokemon)
             Column(
                 modifier = Modifier
