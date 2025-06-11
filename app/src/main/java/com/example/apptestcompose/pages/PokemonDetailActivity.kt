@@ -11,12 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.apptestcompose.model.PokemonModel
 import com.example.apptestcompose.pages.ui.theme.AppTestComposeTheme
+import android.util.Log
 
 class PokemonDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val pokemon: PokemonModel = intent.getSerializableExtra("intent_pokemon") as PokemonModel
+        Log.d("PokemonDetailActivity", "intent_pokemon: ${pokemon.toString()}")
         setContent {
             AppTestComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

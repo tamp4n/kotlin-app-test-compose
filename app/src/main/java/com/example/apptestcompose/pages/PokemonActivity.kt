@@ -119,7 +119,12 @@ fun PokemonContent(
             items = pokemons,
             itemContent = { pokemon ->
                 PokemonItem(pokemon) {
-                    context.startActivity(Intent(context, PokemonDetailActivity::class.java), null)
+                    context.startActivity(
+                        Intent(
+                            context, PokemonDetailActivity::class.java
+                        ).putExtra("intent_pokemon", pokemon),
+                        null
+                    )
                 }
             }
         )
