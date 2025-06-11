@@ -16,7 +16,7 @@ captures/
 *.aab
 output.json
 
-# IntelliJ
+# IntelliJ IDEA
 *.iml
 .idea/
 misc.xml
