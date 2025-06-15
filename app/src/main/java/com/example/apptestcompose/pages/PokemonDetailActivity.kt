@@ -14,6 +14,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.apptestcompose.model.PokemonModel
 import com.example.apptestcompose.pages.ui.theme.AppTestComposeTheme
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
 class PokemonDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +34,9 @@ class PokemonDetailActivity : ComponentActivity() {
         setContent {
             AppTestComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting2(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    PokemonDetailContent(
+                        modifier = Modifier.padding(innerPadding),
+                        pokemon
                     )
                 }
             }
@@ -35,17 +45,30 @@ class PokemonDetailActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+private fun PokemonDetailContent(
+    modifier: Modifier = Modifier,
+    pokemon: PokemonModel
+) {
+    Column(modifier = modifier) {
+        //image
+        PokemonDetailImage(pokemon)
+        
+        //text
+        //description
+
+    }
+
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview2() {
-    AppTestComposeTheme {
-        Greeting2("Android")
-    }
+private fun PokemonDetailImage(
+    pokemon: PokemonModel
+) {
+    Image(
+        painter = painterResource(id = pokemon.image),
+
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxWidth()
+    )
 }
