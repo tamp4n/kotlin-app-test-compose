@@ -20,10 +20,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.apptestcompose.R
 
 class PokemonDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +55,15 @@ private fun PokemonDetailContent(
     Column(modifier = modifier) {
         //image
         PokemonDetailImage(pokemon)
-        
+
         //text
+        PokemonDetailTitle(pokemon)
+
         //description
+        PokemonDetailDesc(
+            title = stringResource(R.string.description_title),
+            content = stringResource(R.string.description_content)
+        )
 
     }
 
@@ -71,4 +80,41 @@ private fun PokemonDetailImage(
         contentScale = ContentScale.Crop,
         modifier = Modifier.fillMaxWidth()
     )
+}
+
+@Composable
+private fun PokemonDetailTitle(
+    pokemon: PokemonModel
+) {
+    Text(
+        text = pokemon.name,
+        style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
+        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+        modifier = Modifier.padding(horizontal = 16.dp)
+    )
+}
+
+@Composable
+private fun PokemonDetailDesc(
+    title: String,
+    content: String
+) {
+    Column(
+        modifier = Modifier.padding(top = 16.dp)
+    ) {
+        HorizontalDivider(modifier = Modifier.padding(bottom = 0.dp))
+
+        Text(
+            text = title,
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(16.dp)
+        )
+
+        Text(
+            text = content,
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+        )
+
+    }
 }

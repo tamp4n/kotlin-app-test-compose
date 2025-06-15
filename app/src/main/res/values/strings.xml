@@ -2,4 +2,8 @@
     <string name="app_name">AppTestCompose</string>
     <string name="title_activity_pokemon">PokemonActivity</string>
     <string name="title_activity_pokemon_detail">PokemonDetailActivity</string>
+
+    <string name="description_title">Description</string>
+    <string name="description_content">Description Content</string>
+
 </resources>
